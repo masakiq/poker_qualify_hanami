@@ -1,0 +1,53 @@
+<h2> Board </h2>
+<div class="playingCards fourColours rotateHand">
+  <ul class="table">
+    <% bord.each do |card| %>
+      <li>
+          <div class="card rank-<%= card[:num] %> <%= card[:suit] %>">
+            <span class="rank"><%= card[:num].upcase %></span>
+            <span class="suit">&<%= card[:suit] %>;</span>
+          </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="clear"></div>
+
+<% hands.each_with_index do |hand, index| %>
+  <h3> Player <%= index + 1 %> </h3>
+  <div class="playingCards fourColours rotateHand">
+    <ul class="table">
+      <% hand.each do |card| %>
+        <li>
+            <div class="card rank-<%= card[:num] %> <%= card[:suit] %>">
+              <span class="rank"><%= card[:num].upcase %></span>
+              <span class="suit">&<%= card[:suit] %>;</span>
+            </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="clear"></div>
+<% end %>
+
+</br>
+<div class="clear"></div>
+
+<h3>Which won?</h3>
+
+<div>
+  <form action="/qualify" method="post">
+    <% bord.each_with_index do |card, index| %>
+      <input type="hidden" name="bord[<%= index + 1 %>]" value='<%= "#{card[:suit]}.#{card[:num]}" %>'>
+    <% end %>
+    <% hands.each_with_index do |hand, i| %>
+      <% hand.each_with_index do |card, t| %>
+        <input type="hidden" name="hand[<%= i + 1 %>][<%= t + 1 %>]" value='<%= "#{card[:suit]}.#{card[:num]}" %>'>
+      <% end %>
+    <% end %>
+    <% hands.each_with_index do |_card, index| %>
+      <button type="submit" name="answer" value="<%= index + 1 %>" class="btn-square">Player<%= index + 1 %></button>
+    <% end %>
+  </form>
+</div>

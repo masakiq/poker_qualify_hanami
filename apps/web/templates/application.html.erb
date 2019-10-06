@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web</title>
+    <%= favicon %>
+    <%= stylesheet 'style' %>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>CSS Playing Cards</title>
+    <link rel="stylesheet" type="text/css" href="cards.css" media="screen" />
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" type="text/css" href="cards-ie.css" media="screen" />
+    <![endif]-->
+    <!--[if IE 9]>
+        <link rel="stylesheet" type="text/css" href="cards-ie9.css" media="screen" />
+    <![endif]-->
+    <!-- the following js and css is not part of the CSS cards, but only for this example page -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript"><!--
+    $(document).ready(function(){
+        $('.options').addClass('active');
+        $('.toggle li').click(function(){
+            $('.playingCards').toggleClass($(this).text());
+        });
+        $('.lang li').click(function(){
+            $('html').attr('lang', $(this).text());
+            $('html').attr('xml:lang', $(this).text());
+        });
+    });
+    //--></script>
+    <style type="text/css"><!--
+        body {
+            margin: 2em 20%;
+        }
+        .options.active {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            background: #ddd;
+            padding: .5em;
+        }
+        .options.active h3 {
+            font-size: 1.2em;
+        }
+        .options.active ul {
+            padding: 0;
+        }
+        .options.active li {
+            color: #00c;
+            text-decoration: underline;
+            margin-left: 1.5em;
+            cursor: pointer;
+        }
+        .options.active li:hover {
+            text-decoration: none;
+        }
+        div.clear {
+            clear: both;
+            height: 0;
+            line-height: 0;
+            font-size: 1px;
+            visibility: hidden;
+        }
+    --></style>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

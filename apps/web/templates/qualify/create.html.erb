@@ -1,0 +1,41 @@
+<h2> Board </h2>
+<div class="playingCards fourColours rotateHand">
+  <ul class="table">
+    <% bord.each do |card| %>
+      <li>
+          <div class="card rank-<%= card[:num] %> <%= card[:suit] %>">
+            <span class="rank"><%= card[:num].upcase %></span>
+            <span class="suit">&<%= card[:suit] %>;</span>
+          </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="clear"></div>
+<% hands.each_with_index do |hand, index| %>
+  <h3> Player <%= index + 1 %> </h3>
+  <div class="playingCards fourColours rotateHand">
+    <ul class="table">
+      <% hand.each do |card| %>
+        <li>
+            <div class="card rank-<%= card[:num] %> <%= card[:suit] %>">
+              <span class="rank"><%= card[:num].upcase %></span>
+              <span class="suit">&<%= card[:suit] %>;</span>
+            </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="clear"></div>
+<% end %>
+
+</br>
+<div class="clear"></div>
+
+<h3>Result</h3>
+
+</br>
+<div class="clear"></div>
+
+<a href="/qualify/new">Retry</a>

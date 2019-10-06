@@ -1,0 +1,41 @@
+<div class="playingCards fourColours rotateHand">
+  <ul class="table">
+    <% bord.each do |card| %>
+      <li>
+          <div class="card rank-<%= card[:num] %> <%= card[:suit] %>">
+            <span class="rank"><%= card[:num].upcase %></span>
+            <span class="suit">&<%= card[:suit] %>;</span>
+          </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="playingCards fourColours rotateHand">
+  <ul class="table">
+    <% hands.each do |hand| %>
+      <% hand.each do |card| %>
+        <li>
+            <div class="card rank-<%= card[:num] %> <%= card[:suit] %>">
+              <span class="rank"><%= card[:num].upcase %></span>
+              <span class="suit">&<%= card[:suit] %>;</span>
+            </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+<%=
+  form_for :qualify, '/qualify' do
+    div class: 'controls' do
+      submit 'A'
+    end
+
+    div class: 'controls' do
+      submit 'B'
+    end
+  end
+%>
+</div>

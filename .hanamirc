@@ -1,0 +1,3 @@
+project=poker_qualify_hanami
+test=rspec
+template=erb
