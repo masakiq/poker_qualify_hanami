@@ -11,6 +11,7 @@ module Web
           @param = params
           @bord = bord
           @hands = hands
+          QualifyHands.new(@bord, @hands)
         end
 
         private
