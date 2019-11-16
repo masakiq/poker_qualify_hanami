@@ -10,6 +10,10 @@ class Card
     check_suit
   end
 
+  def same?(card)
+    number == card.number && suit == card.suit
+  end
+
   private
 
   def check_number
