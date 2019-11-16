@@ -4,14 +4,15 @@ module Web
       class Create
         include Web::Action
 
-        expose :param, :bord, :hands
+        expose :param, :bord, :hands, :result, :answer
 
         def call(params)
           puts params
           @param = params
           @bord = bord
           @hands = hands
-          QualifyHands.new(@bord, @hands)
+          @result = QualifyHands.new(@bord, @hands).execute
+          @answer = params[:answer].to_i
         end
 
         private
