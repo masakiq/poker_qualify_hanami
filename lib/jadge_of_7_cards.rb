@@ -9,11 +9,22 @@ class JadgeOf7Cards
   end
 
   def execute
-    roles = []
+    role_and_hands = []
     cards.combination(5) do |a, b, c, d, e|
       temp = [a, b, c, d, e]
-      roles << HandRoleJadge.new(temp).execute
+      role_and_hands << [HandRoleJadge.new(temp).execute, temp]
     end
-    roles.sort.last
+    role.sort.last
+  end
+
+  private
+
+  def extract_same_roles(role_and_hands)
+    strongest = role_and_hands.sort.last[0]
+    strongest_hands = []
+    role_and_hands.each do |rah|
+      strongest_hands << { role: rah[0], hand: rah[1] } if rah[0] == strongest
+    end
+    strongest_hands
   end
 end
