@@ -1,16 +1,5 @@
 class HandRoleJadge
   class NumberOfCardInvalidError < StandardError; end
-
-  NO_PAIR = 0
-  ONE_PAIR = 1
-  TWO_PAIR = 2
-  THREE_OF_A_KIND = 3
-  STRAIGHT = 4
-  FLUSH = 5
-  FULL_HOUSE = 6
-  FOUR_OF_A_KIND = 7
-  STRAIGHT_FLUSH = 8
-
   attr_reader :cards, :jadged_hand
 
   def initialize(cards)
@@ -34,7 +23,7 @@ class HandRoleJadge
 
   def create_no_pair
     numbers = cards.map {|c| c.number }.sort.reverse
-    @jadged_hand = JadgedNoPair.new(nil, numbers)
+    @jadged_hand = JadgedNoPair.new([], numbers)
   end
 
   # 2ペア、3カード、フルハウス、4カード含む
@@ -48,7 +37,7 @@ class HandRoleJadge
     cards.each do |card|
       kickers << if number != card.number
     end
-    @jadged_hand = JadgedOnePair.new(number, kickers)
+    @jadged_hand = JadgedOnePair.new([number], kickers)
     true
   end
 
@@ -72,7 +61,7 @@ class HandRoleJadge
     cards.each do |card|
       kicker = card.number unless numbers.include?(card.number)
     end
-    @role = JadgedTwoPair.new(numbers, kicker)
+    @role = JadgedTwoPair.new(numbers, [kicker])
     true
   end
 
@@ -87,7 +76,7 @@ class HandRoleJadge
     cards.each do |card|
       kickers << card.number unless card.number != role_number
     end
-    @jadged_hand = JadgedThreeOfAKind.new(role_number, kickers)
+    @jadged_hand = JadgedThreeOfAKind.new([role_number], kickers)
     true
   end
 
@@ -111,7 +100,7 @@ class HandRoleJadge
     return false unless s
     role_number = sorted.last.number
     kicker = sorted.last.number
-    @jadged_hand = JadgedStraight.new(role_number, kicker)
+    @jadged_hand = JadgedStraight.new([role_number], [kicker])
     true
   end
 
@@ -119,7 +108,7 @@ class HandRoleJadge
   def flush?
     return false unless cards[0].suit == cards[1].suit && cards[0].suit == cards[2].suit && cards[0].suit == cards[3].suit && cards[0].suit == cards[4].suit
     role_number = cards.map {|c| c.number }.sort.last
-    @jadged_hand = JadgedFlush.new(role_number, role_number)
+    @jadged_hand = JadgedFlush.new([role_number], [role_number])
     true
   end
 
@@ -138,7 +127,7 @@ class HandRoleJadge
     end
     role_numbers.uniq!
     return false if role_numbers.size != 2
-    @jadged_hand = JadgedFullHouse.new(role_numbers, kicker)
+    @jadged_hand = JadgedFullHouse.new(role_numbers, [kicker])
     true
   end
 
@@ -152,7 +141,7 @@ class HandRoleJadge
     end
     return false if role_number == 0
     kicker = cards.reject {|c| c.number == role_number }.first.number
-    @jadged_hand = JadgedFourOfAKind.new(role_number, kicker)
+    @jadged_hand = JadgedFourOfAKind.new([role_number], [kicker])
     true
   end
 

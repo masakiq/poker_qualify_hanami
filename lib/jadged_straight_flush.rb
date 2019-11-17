@@ -1,9 +1,7 @@
 class JadgedStraightFlush < JadgedHand
-  attr_reader :role_number, :kicker
-
-  def initialize(role_number, kicker)
+  def initialize(role_numbers, kickers)
     @role = STRAIGHT_FLUSH
-    @role_number = role_number
-    @kicker = kicker
+    @role_numbers = role_numbers
+    @kickers = kickers
   end
 end

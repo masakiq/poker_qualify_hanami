@@ -1,9 +1,8 @@
 class JadgedFlush < JadgedHand
-  attr_reader :role_number, :kicker
-
-  def initialize(role_number, kicker)
+  # フラッシュは同じスートでの勝負となるので一番上のカードだけ保存する
+  def initialize(role_numbers, kickers)
     @role = FLUSH
-    @role_number = role_number
-    @kicker = kicker
+    @role_numbers = role_numbers
+    @kickers = kickers
   end
 end

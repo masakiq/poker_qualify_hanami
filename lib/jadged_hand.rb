@@ -1,5 +1,5 @@
 class JadgedHand
-  attr_reader :role
+  attr_reader :role, :role_numbers, :kickers
 
   NO_PAIR = 0
   ONE_PAIR = 1

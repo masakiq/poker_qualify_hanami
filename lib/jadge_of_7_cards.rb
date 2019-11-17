@@ -9,10 +9,10 @@ class JadgeOf7Cards
   end
 
   def execute
-    role_and_hands = []
+    jadged_hands = []
     cards.combination(5) do |a, b, c, d, e|
       temp = [a, b, c, d, e]
-      role_and_hands << [HandRoleJadge.new(temp).execute, temp]
+      jadged_hands << HandRoleJadge.new(temp).execute.jadged_hand
     end
     role.sort.last
   end

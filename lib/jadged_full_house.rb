@@ -1,9 +1,8 @@
 class JadgedFullHouse < JadgedHand
-  attr_reader :role_numbers, :kicker
-
-  def initialize(role_numbers, kicker)
+  # 3 枚のほうのナンバーが kickers に入る
+  def initialize(role_numbers, kickers)
     @role = FULL_HOUSE
     @role_numbers = role_numbers
-    @kicker = kicker
+    @kickers = kickers
   end
 end

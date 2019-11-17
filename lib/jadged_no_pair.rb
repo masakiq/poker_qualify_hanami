@@ -1,9 +1,7 @@
 class JadgedNoPair < JadgedHand
-  attr_reader :role_number, :kickers
-
-  def initialize(role_number, kickers)
+  def initialize(role_numbers, kickers)
     @role = NO_PAIR
-    @role_number = nil
+    @role_numbers = []
     @kickers = kickers
   end
 end
