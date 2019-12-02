@@ -35,7 +35,7 @@ class HandRoleJadge
     return false if number == 0
     kickers = []
     cards.each do |card|
-      kickers << if number != card.number
+      kickers << card.number if number != card.number
     end
     @jadged_hand = JadgedOnePair.new([number], kickers)
     true
@@ -61,7 +61,7 @@ class HandRoleJadge
     cards.each do |card|
       kicker = card.number unless numbers.include?(card.number)
     end
-    @role = JadgedTwoPair.new(numbers, [kicker])
+    @jadged_hand = JadgedTwoPair.new(numbers, [kicker])
     true
   end
 
@@ -107,8 +107,9 @@ class HandRoleJadge
   # ストレートフラッシュ含む
   def flush?
     return false unless cards[0].suit == cards[1].suit && cards[0].suit == cards[2].suit && cards[0].suit == cards[3].suit && cards[0].suit == cards[4].suit
-    role_number = cards.map {|c| c.number }.sort.last
-    @jadged_hand = JadgedFlush.new([role_number], [role_number])
+    # ace の時は 14 にする
+    role_numbers = cards.map {|c| c.number == 1 ? 14 : c.number }
+    @jadged_hand = JadgedFlush.new(role_numbers, role_numbers)
     true
   end
 

@@ -10,4 +10,10 @@ class JadgedHand
   FULL_HOUSE = 6
   FOUR_OF_A_KIND = 7
   STRAIGHT_FLUSH = 8
+
+  def same?(jadged_hand)
+    role == jadged_hand.role &&
+    role_numbers == jadged_hand.role_numbers &&
+    kickers == jadged_hand.role_numbers
+  end
 end

@@ -12,7 +12,9 @@ class JadgeOf7Cards
     jadged_hands = []
     cards.combination(5) do |a, b, c, d, e|
       temp = [a, b, c, d, e]
-      jadged_hands << HandRoleJadge.new(temp).execute.jadged_hand
+      hand_role_jadge = HandRoleJadge.new(temp)
+      hand_role_jadge.execute
+      jadged_hands << hand_role_jadge.jadged_hand
     end
     ExtractStrongestHand.new(jadged_hands).execute
   end

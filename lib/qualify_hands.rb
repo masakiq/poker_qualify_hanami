@@ -11,7 +11,8 @@ class QualifyHands
     second_player_cards = bord + hands[1]
     first_player_result = JadgeOf7Cards.new(first_player_cards).execute
     second_player_result = JadgeOf7Cards.new(second_player_cards).execute
-    return 0 if first_player_result == second_player_result
-    first_player_result > second_player_result ? 1 : 2
+    result = ExtractStrongestHand.new([first_player_result, second_player_result]).execute
+    return 0 if result.is_a?(Array)
+    first_player_result.same?(result) ? 1 : 2
   end
 end

@@ -1,5 +1,10 @@
+require_relative './jadged_hand.rb'
+
 class JadgedFlush < JadgedHand
-  # フラッシュは同じスートでの勝負となるので一番上のカードだけ保存する
+  # 5 枚のカードナンバーすべてが保存される。
+  # role_numbers と kickers の中身は同じ
+  # ace は 14 に変換されている。
+  # 強さは合計値の高いほうとなる。
   def initialize(role_numbers, kickers)
     @role = FLUSH
     @role_numbers = role_numbers
