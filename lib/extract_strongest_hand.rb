@@ -42,29 +42,20 @@ class ExtractStrongestHand
   end
 
   def strongest_full_house(hands)
-    # キッカーが Ace の場合
-    ace_kicker_hands = hands.select {|h| h.kickers.first == 1 }
-    return ace_kicker_hands.first if ace_kicker_hands.size == 1
-    if ace_kicker_hands.size >= 2
-      sorted = ace_kicker_hands.sort {|a, b| a.two_cards <=> b.two_cards }
-      strongest_two_cards = sorted.last.two_cards
-      strongest_two_cards_hands = sorted.select do |s|
-        s.two_cards == strongest_two_cards
-      end
-      return strongest_two_cards_hands.first if strongest_two_cards_hands.size == 1
-      return strongest_two_cards_hands
-    end
+    three_card_list = hands.map {|h| h.three_card }
+    three_index_list = which_is_strong(three_card_list)
+    return hands[three_index_list] if three_index_list.size == 1
 
-    # キッカーが Ace じゃない場合
-    sorted = hands.sort {|a, b| a.kickers.first <=> b.kickers.first }
-    strongest_kicker = sorted.last.kickers.first
-    strongest_role_hands = hands.select {|h| h.kickers.first == strongest_kicker }
-    return strongest_role_hands.first if strongest_role_hands.size == 1
-    sorted= strongest_role_hands.sort {|a, b| a.two_cards <=> b.two_cards }
-    strongest_two_cards = sorted.last.two_cards
-    strongest_two_cards_hands = strongest_role_hands.select {|h| h.two_cards == strongest_two_cards }
-    return strongest_two_cards_hands.first if strongest_two_cards_hands.size == 1
-    strongest_two_cards_hands
+    two_card_list = hands.map {|h| h.two_card }
+    two_index_list = which_is_strong(two_card_list)
+    return hands[two_index_list] if two_index_list.size == 1
+
+    merged_index_list = three_index_list & two_index_list
+    strongest_hands = []
+    merged_index_list.each do |i|
+      strongest_hand << hands[i]
+    end
+    strongest_hands
   end
 
   def strongest_flush(hands)

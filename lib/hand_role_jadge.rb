@@ -114,19 +114,19 @@ class HandRoleJadge
   end
 
   def full_house?
-    kicker = 0
-    two_cards = 0
+    three_card = 0
+    two_card = 0
     cards.combination(3) do |a, b, c|
       if a.number == b.number && b.number == c.number
-        kicker = a.number
+        three_card = a.number
         rest = cards.reject {|card| card.same?(a) || card.same?(b) || card.same?(c) }
         if rest[0].number == rest[1].number
-          two_cards = rest[0].number
+          two_card = rest[0].number
         end
       end
     end
-    return false if kicker == 0 || two_cards == 0
-    @jadged_hand = JadgedFullHouse.new([kicker, two_cards], [kicker], two_cards)
+    return false if three_card == 0 || two_card == 0
+    @jadged_hand = JadgedFullHouse.new([three_card, two_card], [], three_card, two_card)
     true
   end
 
