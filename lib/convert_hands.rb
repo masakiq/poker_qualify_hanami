@@ -8,9 +8,9 @@ class ConvertHands
   def run
     hs = []
     hands.each do |hand|
-      h = []
+      h = PokerHand.new
       hand.each do |card|
-        h << Card.new(Converts.convert_num(card[:num]), Converts.convert_suit(card[:suit]))
+        h << Card.new(Convert.num(card[:num]) + Convert.suit(card[:suit]))
       end
       hs << h
     end
