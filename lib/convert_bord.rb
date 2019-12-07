@@ -6,9 +6,9 @@ class ConvertBord
   end
 
   def run
-    b = []
+    b = PokerHand.new
     bord.each do |card|
-      b << Card.new(Converts.convert_num(card[:num]), Converts.convert_suit(card[:suit]))
+      b << Card.new(Convert.num(card[:num]) + Convert.suit(card[:suit]))
     end
     b
   rescue => e
