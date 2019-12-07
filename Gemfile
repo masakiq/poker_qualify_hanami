@@ -5,14 +5,13 @@ gem 'hanami',       '~> 1.3'
 gem 'hanami-model', '~> 1.3'
 gem 'ruby-poker'
 
-gem 'sqlite3'
-
 group :development do
   # Code reloading
   # See: https://guides.hanamirb.org/projects/code-reloading
   gem 'shotgun', platforms: :ruby
   gem 'hanami-webconsole'
   gem 'pry'
+  gem 'sqlite3'
 end
 
 group :test, :development do
@@ -26,4 +25,5 @@ end
 
 group :production do
   # gem 'puma'
+  gem 'pg'
 end
